@@ -5,23 +5,25 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.logging.Logger;
 
-public class Player2{
+public class Player2 {
+	private static final Logger LOG = Logger.getLogger(Player2.class.getName());
 	String host;
 	int port = 0;
-	
+
 	public static void main(String[] args) {
 		String hostName = args[0];
 		int portNumber = Integer.parseInt(args[1]);
 		Player1 player1 = new Player1(hostName, portNumber);
 		player1.execute();
 	}
-	
-    public Player2(String hostname, int port) {
-    	this.host = hostname;
-    	this.port = port;
-    }
-	
+
+	public Player2(String hostname, int port) {
+		this.host = hostname;
+		this.port = port;
+	}
+
 	public void execute() {
 		Socket socket = null;
 		try {
@@ -47,11 +49,10 @@ public class Player2{
 				added = -1;
 			}
 			writer.write("Player2," + added + "," + output);
-			
+
 		} catch (IOException ex) {
-			ex.printStackTrace();
+			LOG.warning("Exception has occured due to " + ex.getMessage());
 		}
 	}
-	
 
 }

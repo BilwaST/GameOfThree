@@ -6,23 +6,25 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Random;
+import java.util.logging.Logger;
 
 public class Player1 {
+	private static final Logger LOG = Logger.getLogger(Player1.class.getName());
 	String host;
 	int port = 0;
-	
+
 	public static void main(String[] args) {
 		String hostName = args[0];
 		int portNumber = Integer.parseInt(args[1]);
 		Player1 player1 = new Player1(hostName, portNumber);
 		player1.execute();
 	}
-	
-    public Player1(String hostname, int port) {
-    	this.host = hostname;
-    	this.port = port;
-    }
-	
+
+	public Player1(String hostname, int port) {
+		this.host = hostname;
+		this.port = port;
+	}
+
 	public void execute() {
 		Socket socket = null;
 		try {
@@ -53,12 +55,11 @@ public class Player1 {
 				output = (num - 1) / 3;
 				added = -1;
 			}
-			writer.write("Player1,"+ added + ","+output	);
-			
+			writer.write("Player1," + added + "," + output);
+
 		} catch (IOException ex) {
-			ex.printStackTrace();
+			LOG.warning("Exception has occured due to " + ex.getMessage());
 		}
 	}
-	
 
 }
